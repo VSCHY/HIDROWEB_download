@@ -68,8 +68,8 @@ for ID, NAME in stations.values:
   subprocess.check_call(["unzip", home+"Medicoes_convencionais.zip", "-d", home])
   subprocess.check_call(["unzip", home+"vazoes_C_"+str(ID)+".zip", "-d", home]) 
 
-  subprocess.check_call(["sed", "-i", "-e" ,'s/,/./g', home+"datos/vazoes_C_"+str(ID)+".csv"])
-  subprocess.check_call(["sed", "-i", "-e" ,'s/\;/,/g', home+"datos/vazoes_C_"+str(ID)+".csv"])
+  subprocess.check_call(["sed", "-i", "-e" ,'s/,/./g', home+"vazoes_C_"+str(ID)+".csv"])
+  subprocess.check_call(["sed", "-i", "-e" ,'s/\;/,/g', home+"vazoes_C_"+str(ID)+".csv"])
 
   subprocess.check_call(["soffice", "--headless", "--convert-to", "xlsx", "--outdir",home, home+"vazoes_C_"+str(ID)+".csv"])
 
