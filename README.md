@@ -1,5 +1,5 @@
 # BR_HIDROWEB_Dis
-Download monthly discharge from HIDROWEB hydrological stations (Brazil) with a python script.
+Download monthly discharge from HIDROWEB hydrological stations (Brazil) with a python script. (for Linux)
 
 ## Getting Started
 
