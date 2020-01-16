@@ -18,7 +18,10 @@ import pandas as pd
 import subprocess
 import os
 import unidecode
+import glob
+import time
 
+#############################
 #############################
 
 # Directory where the data will be saved
@@ -30,6 +33,7 @@ if homedir == "":
     print("Test - don't forget to change homedir further !")
     homedir = workdir
  
+#############################
 #############################
 
 file_stations = "./stations.csv"
@@ -66,13 +70,23 @@ for ID, NAME in stations.values:
   #####
   print("**Process data**")  
   subprocess.check_call(["unzip", home+"Medicoes_convencionais.zip", "-d", home])
-  subprocess.check_call(["unzip", home+"vazoes_C_"+str(ID)+".zip", "-d", home]) 
 
-  subprocess.check_call(["sed", "-i", "-e" ,'s/,/./g', home+"vazoes_C_"+str(ID)+".csv"])
-  subprocess.check_call(["sed", "-i", "-e" ,'s/\;/,/g', home+"vazoes_C_"+str(ID)+".csv"])
+  D = {"vazoes":"Caudal", "cotas":"Altura"}
+  
+  for varn in ["vazoes", "cotas"]:
+      filename = home+"{0}_C_{1}.zip".format(varn,ID)
+      if os.path.exists(filename):
+          subprocess.check_call(["unzip", filename, "-d", home]) 
 
-  subprocess.check_call(["soffice", "--headless", "--convert-to", "xlsx", "--outdir",home, home+"vazoes_C_"+str(ID)+".csv"])
+          subprocess.check_call(["sed", "-i", "-e" ,'s/,/./g', filename.replace("zip","csv")])
+          subprocess.check_call(["sed", "-i", "-e" ,'s/\;/,/g', filename.replace("zip","csv")])
 
-  subprocess.check_call(["mv", home+"vazoes_C_"+str(ID)+".xlsx", home+NAME_alt+"_Caudal_Mensual.xlsx"])
+          subprocess.check_call(["soffice", "--headless", "--convert-to", "xlsx", "--outdir",home, filename.replace("zip","csv")])
+          time.sleep(5)
 
+          subprocess.check_call(["mv", filename.replace("zip","xlsx"), home+NAME_alt+"_{0}_Mensual.xlsx".format(D[varn])])
+      
+          os.remove(filename.replace("zip","csv"))
+
+  #####
 
