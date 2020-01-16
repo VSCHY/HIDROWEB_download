@@ -36,7 +36,7 @@ If you want to test the script, the stations.csv file is already filled with the
 
 ## Output
 
-In the directory you defined you will find a new sub-directory named "BR-Porto_Murtinho" for the station Porto Murtinho for example. It will contain the data for the station and the csv / excel file for the monthly discharge.
+In the directory you defined you will find a new sub-directory named "BR-Porto_Murtinho" for the station Porto Murtinho for example. It will contain the data for the station and the excel file for the monthly mean discharge and the monthly mean river stage.
 
 
 ## Authors
